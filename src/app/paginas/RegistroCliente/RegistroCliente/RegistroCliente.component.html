@@ -1,0 +1,37 @@
+<br>
+<div class="container">
+  <div class="mb-3 row justify-content-center">
+      <div class="card col-4 " style="background-color: rgba(157, 211, 247, 0.808);">
+        <div class="card-header">
+        <h5 class="modal-title text-center"  id="exampleModalLabel">Registro de Usuario</h5>
+      </div>
+      <div class="modal-body">
+         <form [formGroup]="formularioCliente">  
+          <div class="col-mb-6">
+          <label  class="form-label">Nombre</label>
+          <input type="text" class="form-control"  formControlName="nombre">
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">Apellido</label>
+          <input type="text" class="form-control"  formControlName="apellido">
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">Telefono</label>
+          <input type="text" class="form-control" formControlName="telefono">
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">Email</label>
+          <input type="text" class="form-control"  formControlName="email">
+        </div>
+
+        </form>  
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-primary" (click)="guardarCliente()">Registrar</button> 
+      </div>
+      <br>
+    </div>
+

@@ -1,0 +1,13 @@
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <a class="page-link" href="javascript:" tabindex="1" aria-disabled="true" (click)="atras()">Atras</a>
+    </li>
+    <li class="page-item" [ngClass]="{'active': item == currentPage}" *ngFor="let item of listaPagina">
+      <a class="page-link" href="javascript:" (click)="fmselect(item)">{{item}}</a>
+    </li>
+    <li class="page-item" [ngClass]="{'disable': currentPage == pages}">
+      <a class="page-link" href="javascript:" (click)="siguiente()">Siguiente</a>
+    </li>
+  </ul>
+</nav>

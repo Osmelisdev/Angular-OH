@@ -1,0 +1,133 @@
+<br>
+<div class="container">
+  <div class="card">
+    <div class="card-header" style="background-color: rgba(157, 211, 247, 0.808);">
+      <h3 class="table table-striped">{{titulo}}</h3>
+  
+      <div>
+        <h4>Filtrar Por:</h4>
+      </div>
+        <div>
+           <input class="form-control" type="text" [(ngModel)]="filtrarPor" (input)="consultaVehiculos()">  
+        </div>
+        <br>
+    <div>
+       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo</button>
+    </div>
+    <br>
+    <th>
+      <tr>
+        <th colspan="6">
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="addon-wrapping">Filas</span>
+            <select class="form-select form-select-sm" [(ngModel)]="rows" (change)="consultaVehiculos()">
+            <option value="1">1</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            </select>
+          </div>
+        </th>
+      </tr>
+    </th>
+      <button class="btn btn-success" (click)="mostrarImagen = !mostrarImagen">Mostrar Imagenes</button>
+      <table class="table table-striped">
+          <thead>
+            <th colspan="7">
+            </th>
+                <tr>
+                <th>IMAGENES</th>
+                <th>CODIGO</th>
+                <th>MARCA</th>
+                <th>MODELO</th>
+                <th>AÑO</th>
+                <th>CALIFICACION</th>
+                <th>ACCION</th>
+              </tr>
+          </thead> 
+             
+        <tbody>
+
+         <tr *ngFor="let vehiculo of  listaVehiculo "> 
+          <td>
+          <img class="img-thumbnail" [src]="vehiculo.foto" style="width: 110px; height: 60px;" *ngIf="mostrarImagen">
+        </td>
+          <td>{{vehiculo.codigo}}</td>
+          <td>{{vehiculo.marca}}</td>
+          <td>{{vehiculo.modelo}}</td>
+          <td>{{vehiculo.anio}}</td>
+          <td>
+                <app-calificacion [calificacion]="vehiculo.calificacion" (select)="mostrarAlerta($event)" ></app-calificacion> 
+        </td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button type="button" class="btn btn-success" [routerLink]="[vehiculo.codigo]">Ver</button>
+             <button type="button" class="btn btn-danger" (click)="eliminarvehiculo(vehiculo)">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody> 
+    </table>
+
+    <tfoot>
+      <td colspan="3">
+        <app-paginas-enumeradas [rows]="rows" [pages]="page" (selectPage)="SeleccionarPagina($event)"></app-paginas-enumeradas>
+
+      </td>
+    </tfoot>
+    </div>
+  </div>
+</div>
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Datos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <form [formGroup]="formularioVehiculo">  
+          <div class="mb-3">
+          <label  class="form-label">Codigo</label>
+          <input type="text" class="form-control"  formControlName="codigo">
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">Marca</label>
+          <input type="text" class="form-control"  formControlName="marca">
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">Modelo</label>
+          <input type="text" class="form-control" formControlName="modelo">
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">Año</label>
+          <input type="text" class="form-control"  formControlName="anio">
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">Calificacion</label>
+          <input type="text" class="form-control" formControlName="calificacion">
+        </div>
+
+        <div class="mb-3">
+          <label  class="form-label">URL de imagen</label>
+          <input type="text" class="form-control" formControlName="foto">
+        </div>
+
+        </form>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+         <button type="button" class="btn btn-primary" (click)="guardarVehiculo()">Guardar</button> 
+      </div>
+    </div>
+  </div>
+</div> 
